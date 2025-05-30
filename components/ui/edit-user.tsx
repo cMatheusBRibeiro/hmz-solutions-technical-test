@@ -127,7 +127,7 @@ const EditUserDialog = ({ user, onClose }: EditUserProps) => {
 
   return (
     <Dialog open={isSelectedUser} onOpenChange={() => onClose()}>
-      <DialogContent className="z-50">
+      <DialogContent className="w-5xl sm:max-w-5xl">
         <DialogHeader>
           <DialogTitle>Editar usuário</DialogTitle>
         </DialogHeader>

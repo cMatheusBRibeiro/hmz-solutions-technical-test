@@ -32,7 +32,7 @@ const AppSidebar = ({ onLogout = () => {} }: AppSidebarProps) => {
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link href="/">
-                    <span>Usuários</span>
+                    <span>USUÁRIOS</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
