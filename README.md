@@ -31,18 +31,30 @@ Assim as duas variáveis utilizadas no sistema serão satisfeitas.
 
 ```cmd
 yarn
+
+ou
+
+npm install
 ```
 
 2. Compilar o projeto
 
 ```cmd
 yarn build
+
+ou
+
+npm run build
 ```
 
 3. Executar o projeto como produção
 
 ```cmd
 yarn start
+
+ou
+
+npm start
 ```
 
 Dessa forma, subirá o mesmo servidor que seria rodado em produção, com todos os arquivos compilados previamente utilizando a tecnologia SSR (Server Side Rendering).
@@ -59,3 +71,5 @@ Exemplos de e-mails com resposta positiva:
 
 1. george.bluth@reqres.in
 2. emma.wong@reqres.in
+
+Com relação à senha, pode passar a que desejar.
