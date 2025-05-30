@@ -7,4 +7,9 @@ export {
   useUpdateUser,
 } from "./User";
 
-export { AuthApi, type LoginForm, type LoginFormResponse } from "./Auth";
+export {
+  AuthApi,
+  type LoginForm,
+  type LoginFormResponse,
+  useLogin,
+} from "./Auth";
