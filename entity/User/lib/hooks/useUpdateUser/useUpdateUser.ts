@@ -1,4 +1,5 @@
 import { UserApi } from "@/entity/User/model";
+import { EditUser } from "@/entity/User/types";
 import { useCallback, useState } from "react";
 
 const useUpdateUser = (userApi: UserApi) => {
@@ -7,12 +8,13 @@ const useUpdateUser = (userApi: UserApi) => {
   const [error, setError] = useState<string | null>(null);
 
   const dispatchUpdateUser = useCallback(
-    async (id: number) => {
+    async (id: number, editedUser: EditUser) => {
       setIsLoading(true);
       setIsUpdated(false);
+      setError(null);
 
       try {
-        await userApi.updateUser(id);
+        await userApi.updateUser(id, editedUser);
         setIsUpdated(true);
       } catch (error) {
         if (error instanceof Error) {

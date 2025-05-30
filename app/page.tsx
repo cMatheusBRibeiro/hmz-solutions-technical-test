@@ -1,7 +1,14 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
+import EditUserDialog from "@/components/ui/edit-user";
 import UsersTable from "@/components/ui/users";
+import { User } from "@/entity";
+import { useState } from "react";
 
 const UsersPage = () => {
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+
   return (
     <div className="flex flex-col gap-6 p-4 bg-gray-50 h-full">
       <div className="flex justify-between">
@@ -10,7 +17,11 @@ const UsersPage = () => {
           NOVO
         </Button>
       </div>
-      <UsersTable />
+      <UsersTable onSelectUser={setSelectedUser} />
+      <EditUserDialog
+        user={selectedUser}
+        onClose={() => setSelectedUser(null)}
+      />
     </div>
   );
 };

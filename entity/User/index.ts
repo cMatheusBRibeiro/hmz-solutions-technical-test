@@ -1,5 +1,5 @@
 export { UserApi } from "./api";
-export { type User } from "./types";
+export { type User, type EditUser } from "./types";
 export {
   useFetchUsers,
   useDeleteUser,

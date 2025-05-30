@@ -10,13 +10,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useFetchUsers, UserApi } from "@/entity";
+import { useFetchUsers, User, UserApi } from "@/entity";
 import { BackendHttp } from "@/shared";
 import { AxiosAdapter } from "@/shared/lib";
 import { Pencil } from "lucide-react";
 
 export interface UsersTableProps {
-  onSelectUser?: (userId: number) => void;
+  onSelectUser?: (user: User) => void;
 }
 
 const userApi = UserApi(BackendHttp(AxiosAdapter()));
@@ -50,7 +50,7 @@ const UsersTable = ({ onSelectUser = () => {} }: UsersTableProps) => {
               <TableCell className="w-[45px]">
                 <Pencil
                   className="cursor-pointer"
-                  onClick={() => onSelectUser(user.id)}
+                  onClick={() => onSelectUser(user)}
                 />
               </TableCell>
               <TableCell>

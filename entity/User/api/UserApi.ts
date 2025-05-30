@@ -20,9 +20,10 @@ const UserApi = (http: Http): IUserApi => {
         per_page: perPage.toString(),
       });
     },
-    updateUser(id) {
+    updateUser(id, editedUser) {
       return http.put(
-        API.BACKEND.USERS.UPDATE_USER.replace("{id}", id.toString())
+        API.BACKEND.USERS.UPDATE_USER.replace("{id}", id.toString()),
+        editedUser
       );
     },
   };

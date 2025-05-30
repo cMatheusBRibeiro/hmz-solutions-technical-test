@@ -1,9 +1,9 @@
 import { Page } from "@/shared";
-import { User } from "..";
+import { EditUser, User } from "..";
 
 export interface UserApi {
   fetchUsers: (page?: number, perPage?: number) => Promise<Page<User>>;
   fetchUserById: (id: number) => Promise<User>;
-  updateUser: (id: number) => Promise<User>;
+  updateUser: (id: number, editedUser: EditUser) => Promise<User>;
   deleteUser: (id: number) => Promise<void>;
 }

@@ -1,6 +1,7 @@
 export {
   UserApi,
   type User,
+  type EditUser,
   useFetchUsers,
   useDeleteUser,
   useFetchUserById,
