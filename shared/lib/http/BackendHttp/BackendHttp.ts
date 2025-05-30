@@ -2,9 +2,9 @@ import { Http, HttpAdapter } from "@/shared/model";
 
 const BackendHttp = (httpAdapter: HttpAdapter): Http => {
   httpAdapter.setConfig({
-    baseUrl: process.env.BACKEND_BASE_URL,
+    baseUrl: process.env.NEXT_PUBLIC_BACKEND_URL ?? "",
     headers: {
-      "x-api-free": process.env.BACKEND_API_KEY ?? "",
+      "x-api-key": process.env.NEXT_PUBLIC_BACKEND_API_KEY ?? "",
     },
   });
 
