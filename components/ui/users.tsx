@@ -14,7 +14,6 @@ import { useFetchUsers, UserApi } from "@/entity";
 import { BackendHttp } from "@/shared";
 import { AxiosAdapter } from "@/shared/lib";
 import { Pencil } from "lucide-react";
-import { Button } from "./button";
 
 export interface UsersTableProps {
   onSelectUser?: (userId: number) => void;
@@ -34,13 +33,7 @@ const UsersTable = ({ onSelectUser = () => {} }: UsersTableProps) => {
   } = useFetchUsers(userApi);
 
   return (
-    <div className="flex flex-col gap-6 p-4 bg-gray-50 h-full">
-      <div className="flex justify-between">
-        <h2 className="text-xl">Usuários</h2>
-        <Button variant="outline" className="px-6">
-          NOVO
-        </Button>
-      </div>
+    <>
       <Table>
         <TableHeader>
           <TableRow>
@@ -89,7 +82,7 @@ const UsersTable = ({ onSelectUser = () => {} }: UsersTableProps) => {
           onPreviousPage={() => setPage((prev) => prev - 1)}
         />
       </div>
-    </div>
+    </>
   );
 };
 
