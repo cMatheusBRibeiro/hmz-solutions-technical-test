@@ -1,4 +1,4 @@
-import { User, UserApi, useUpdateUser } from "@/entity";
+import { useDeleteUser, User, UserApi, useUpdateUser } from "@/entity";
 import { Label } from "./label";
 import {
   ChangeEvent,
@@ -31,6 +31,12 @@ const userApi = UserApi(BackendHttp(AxiosAdapter()));
 const EditUserDialog = ({ user, onClose }: EditUserProps) => {
   const { dispatchUpdateUser, isLoading, isUpdated, error } =
     useUpdateUser(userApi);
+  const {
+    dispatchDeleteUser,
+    isLoading: isDeleting,
+    isDeleted,
+    error: deleteError,
+  } = useDeleteUser(userApi);
 
   const isSelectedUser = useMemo(() => !!user, [user]);
 
@@ -55,10 +61,16 @@ const EditUserDialog = ({ user, onClose }: EditUserProps) => {
     [editedUser, dispatchUpdateUser]
   );
 
+  const deleteUser = useCallback(() => {
+    if (!editedUser) return;
+
+    dispatchDeleteUser(editedUser.id);
+  }, [editedUser, dispatchDeleteUser]);
+
   useEffect(() => {
     if (isLoading) {
       Swal.fire({
-        title: "Aguarde um moment",
+        title: "Aguarde um momento",
         text: "Estamos enviando as novas informações do usuário",
         didOpen: () => {
           Swal.showLoading();
@@ -84,9 +96,38 @@ const EditUserDialog = ({ user, onClose }: EditUserProps) => {
     }
   }, [isLoading, isUpdated, error]);
 
+  useEffect(() => {
+    if (isDeleting) {
+      Swal.fire({
+        title: "Aguarde um momento",
+        text: "Estamos excluindo o usuário",
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
+    }
+
+    if (isDeleted) {
+      Swal.fire({
+        title: "Sucesso",
+        text: "Usuário excluído com sucesso",
+        icon: "success",
+      });
+      onClose();
+    }
+
+    if (deleteError) {
+      Swal.fire({
+        title: "Erro",
+        text: deleteError,
+        icon: "error",
+      });
+    }
+  }, [isDeleting, isDeleted, deleteError]);
+
   return (
     <Dialog open={isSelectedUser} onOpenChange={() => onClose()}>
-      <DialogContent>
+      <DialogContent className="z-50">
         <DialogHeader>
           <DialogTitle>Editar usuário</DialogTitle>
         </DialogHeader>
@@ -135,12 +176,21 @@ const EditUserDialog = ({ user, onClose }: EditUserProps) => {
             </div>
           </div>
           <div className="mt-6 flex justify-between w-full">
-            <Button className="cursor-pointer" variant="destructive">
+            <Button
+              className="cursor-pointer"
+              variant="destructive"
+              onClick={deleteUser}
+              type="button"
+            >
               EXCLUIR
             </Button>
             <div className="flex gap-2">
               <DialogClose asChild>
-                <Button className="cursor-pointer" variant="outline">
+                <Button
+                  className="cursor-pointer"
+                  variant="outline"
+                  type="button"
+                >
                   CANCELAR
                 </Button>
               </DialogClose>
